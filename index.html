@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>EADGS: Event-Aided Motion Deblurring for 3D Gaussian Splatting</title>
-    <meta name="description" content="EADGS: Event-Aided Motion Deblurring for 3D Gaussian Splatting via Event-Based Initialization and Learnable Pose Refinement">
+    <meta name="description" content="EADGS: Exploiting Event-Based Geometry Cues for Deblurring 3D Gaussian Splatting">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="static/css/academicons.min.css">
@@ -34,7 +34,7 @@
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
                         <h1>
-                            <span class="gradient-text">EADGS</span>: Event-Aided Motion Deblurring for 3D Gaussian Splatting via Event-Based Initialization and Learnable Pose Refinement
+                            EADGS: Exploiting Event-Based Geometry Cues for Deblurring 3D Gaussian Splatting
                         </h1>
 
                         <!-- Authors -->
@@ -68,15 +68,6 @@
                                             <i class="fab fa-github"></i>
                                         </span>
                                         <span>Code (coming soon)</span>
-                                    </a>
-                                </span>
-                                <!-- Video Link -->
-                                <span class="link-block">
-                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="fab fa-youtube"></i>
-                                        </span>
-                                        <span>Video</span>
                                     </a>
                                 </span>
                             </div>
@@ -159,9 +150,7 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        3D Gaussian Splatting (3DGS) has emerged as a powerful representation for novel view synthesis, yet its reliance on accurate Structure-from-Motion (SfM) initialization makes it vulnerable to severe motion blur. Existing deblurring methods face a fundamental chicken-and-egg dilemma: accurate camera poses are needed to deblur images, but deblurred images are needed to estimate poses. Event cameras, with their microsecond-level temporal resolution, offer blur-free observations that can break this cycle, yet prior event-aided approaches rely on indirect multi-stage initialization and treat camera poses as fixed constants.
-                        We propose <b>EADGS</b>, a unified framework that leverages event-based initialization and learnable pose refinement for motion-deblurred 3D Gaussian Splatting. Our method consists of three stages: (1) event data preprocessing via Contrast Maximization with a novel Event Contrast Normalization to produce Motion-Aligned Event Descriptors; (2) a feed-forward vision transformer that directly predicts camera poses and dense 3D point clouds from event descriptors, completely bypassing blur-corrupted RGB-based SfM; and (3) a deblurring 3DGS training loop with Lie-algebraic pose parameterization and alternating optimization for joint trajectory-geometry refinement.
-                        Extensive experiments on synthetic (DeepVoxels, NeRF Synthetic), real scene (Tanks &amp; Temples), and real-world collected (DAVIS346 on UAV) datasets demonstrate that EADGS achieves state-of-the-art performance in novel view synthesis quality under challenging motion blur conditions.
+                        Coming soon.
                     </div>
                 </div>
             </div>
@@ -185,7 +174,7 @@
                     <!-- TODO: Replace with actual overview figure -->
                     <img src="static/img/overview.png" alt="EADGS Pipeline Overview" style="display: inline-block; width: 100%;">
                     <figcaption style="text-align: center; margin-top: 0.5rem; color: #666;">
-                        Figure 1: Overview of the <span class="gradient-text"><strong>EADGS</strong></span> pipeline. Stage 1 preprocesses events into Motion-Aligned Event Descriptors. Stage 2 estimates camera poses and point clouds via a vision transformer. Stage 3 performs deblurring 3DGS training with learnable pose refinement.
+                        Figure 1: Overview of the <strong>EADGS</strong> pipeline. Stage 1 preprocesses events into Motion-Aligned Event Descriptors. Stage 2 estimates camera poses and point clouds via a vision transformer. Stage 3 performs deblurring 3DGS training with learnable pose refinement.
                     </figcaption>
                 </figure>
             </div>
@@ -243,11 +232,11 @@
     <section class="section">
         <div class="container is-max-desktop">
             <div class="container is-max-desktop is-mobile">
-                <h2 class="title is-3">Visual Comparisons</h2>
+                <h2 class="title is-3">Results Gallery</h2>
             </div>
             <br>
             <div class="column">
-                <p>Interactive image comparisons between baseline methods and <strong>EADGS</strong>. Drag the slider to compare.</p>
+                <p>Novel view synthesis results from motion-blurred inputs. Drag the slider to compare the blurry input with our reconstructed output.</p>
             </div>
 
             <div class="columns is-centered has-text-centered">
@@ -259,21 +248,14 @@
                                 <!-- TODO: Replace with actual result image -->
                                 <img src="static/img/example/scene1/ours.png">
                                 <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                    EADGS (Ours)
-                                </div>
-                                <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                    -- dB
+                                    Ours
                                 </div>
                             </div>
                             <div class="bal-before" style="width:50%;">
                                 <div class="bal-before-inset" style="width: 539px;">
-                                    <!-- TODO: Replace with baseline result image -->
-                                    <img src="static/img/example/scene1/baseline.png">
+                                    <img src="static/img/example/scene1/input.png">
                                     <div class="bal-beforePosition beforeLabel">
-                                        Baseline
-                                    </div>
-                                    <div class="bal-beforePosition beforeSize">
-                                        -- dB
+                                        Input
                                     </div>
                                 </div>
                             </div>
@@ -287,20 +269,14 @@
                             <div class="bal-after">
                                 <img src="static/img/example/scene2/ours.png">
                                 <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                    EADGS (Ours)
-                                </div>
-                                <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                    -- dB
+                                    Ours
                                 </div>
                             </div>
                             <div class="bal-before" style="width:50%;">
                                 <div class="bal-before-inset" style="width: 539px;">
-                                    <img src="static/img/example/scene2/baseline.png">
+                                    <img src="static/img/example/scene2/input.png">
                                     <div class="bal-beforePosition beforeLabel">
-                                        Baseline
-                                    </div>
-                                    <div class="bal-beforePosition beforeSize">
-                                        -- dB
+                                        Input
                                     </div>
                                 </div>
                             </div>
@@ -319,20 +295,14 @@
                             <div class="bal-after">
                                 <img src="static/img/example/scene3/ours.png">
                                 <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                    EADGS (Ours)
-                                </div>
-                                <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                    -- dB
+                                    Ours
                                 </div>
                             </div>
                             <div class="bal-before" style="width:50%;">
                                 <div class="bal-before-inset" style="width: 539px;">
-                                    <img src="static/img/example/scene3/baseline.png">
+                                    <img src="static/img/example/scene3/input.png">
                                     <div class="bal-beforePosition beforeLabel">
-                                        Baseline
-                                    </div>
-                                    <div class="bal-beforePosition beforeSize">
-                                        -- dB
+                                        Input
                                     </div>
                                 </div>
                             </div>
@@ -346,20 +316,14 @@
                             <div class="bal-after">
                                 <img src="static/img/example/scene4/ours.png">
                                 <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                    EADGS (Ours)
-                                </div>
-                                <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                    -- dB
+                                    Ours
                                 </div>
                             </div>
                             <div class="bal-before" style="width:50%;">
                                 <div class="bal-before-inset" style="width: 539px;">
-                                    <img src="static/img/example/scene4/baseline.png">
+                                    <img src="static/img/example/scene4/input.png">
                                     <div class="bal-beforePosition beforeLabel">
-                                        Baseline
-                                    </div>
-                                    <div class="bal-beforePosition beforeSize">
-                                        -- dB
+                                        Input
                                     </div>
                                 </div>
                             </div>
@@ -381,7 +345,7 @@
         <div class="container is-max-desktop content">
             <h2 class="title">BibTeX</h2>
             <pre><code>@article{eadgs2025,
-  title={Event-Aided Motion Deblurring for 3D Gaussian Splatting via Event-Based Initialization and Learnable Pose Refinement},
+  title={Exploiting Event-Based Geometry Cues for Deblurring 3D Gaussian Splatting},
   author={TODO},
   journal={TODO},
   year={2025}
