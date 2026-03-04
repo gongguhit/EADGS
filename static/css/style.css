@@ -1,37 +1,60 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 @import "https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css";
 
+/* ===== Gallery Grid ===== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gallery-item {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fafafa;
+    aspect-ratio: 4 / 3;
+}
+
 /* ===== Image Before/After Comparison ===== */
-.bal-container-small {
+.bal-container-auto {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 100%;
     cursor: grab;
     overflow: hidden;
-    border-radius: 10px;
-    margin: 5px;
 }
 
 .bal-after {
-    display: block;
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-.bal-before {
+.bal-after img {
     display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.bal-before {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     z-index: 15;
     overflow: hidden;
 }
@@ -43,16 +66,11 @@
     left: 0;
 }
 
-.bal-after img,
-.bal-before img {
-    object-fit: cover;
-    position: absolute;
+.bal-before-inset img {
+    display: block;
     width: 100%;
     height: 100%;
-    object-position: 50% 50%;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    object-fit: contain;
     -webkit-user-select: none;
     user-select: none;
 }
@@ -78,7 +96,8 @@
 .beforeLabel {
     position: absolute;
     bottom: 0;
-    margin: 1rem;
+    left: 0;
+    margin: 8px;
     font-size: 1em;
     -webkit-user-select: none;
     user-select: none;
@@ -109,7 +128,8 @@
 .afterLabel {
     position: absolute;
     bottom: 0;
-    margin: 1rem;
+    right: 0;
+    margin: 8px;
     font-size: 1em;
     -webkit-user-select: none;
     user-select: none;
