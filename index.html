@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EADGS: Event-Aided Motion Deblurring for 3D Gaussian Splatting</title>
+    <meta name="description" content="EADGS: Event-Aided Motion Deblurring for 3D Gaussian Splatting via Event-Based Initialization and Learnable Pose Refinement">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="static/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.min.css">
+    <script src="static/js/all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/js/script.js"></script>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Title & Links ===== -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1>
+                            <span class="gradient-text">EADGS</span>: Event-Aided Motion Deblurring for 3D Gaussian Splatting via Event-Based Initialization and Learnable Pose Refinement
+                        </h1>
+
+                        <!-- Authors -->
+                        <div class="is-size-5 publication-authors" style="margin-top: 1.5rem;">
+                            <!-- TODO: Replace with actual author names and affiliations -->
+                            <span class="author-block">Author 1<sup>1</sup>,</span>
+                            <span class="author-block">Author 2<sup>1</sup>,</span>
+                            <span class="author-block">Author 3<sup>2</sup></span>
+                        </div>
+                        <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+                            <span class="author-block"><sup>1</sup>Affiliation 1,</span>
+                            <span class="author-block"><sup>2</sup>Affiliation 2</span>
+                        </div>
+
+                        <!-- Links -->
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- Paper / arXiv Link -->
+                                <span class="link-block">
+                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link -->
+                                <span class="link-block">
+                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code (coming soon)</span>
+                                    </a>
+                                </span>
+                                <!-- Video Link -->
+                                <span class="link-block">
+                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-youtube"></i>
+                                        </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Video Carousel ===== -->
+    <script>
+        let currentIndex = 0;
+        function updateCarousel() {
+            const carousel = document.querySelector('.results-carousel');
+            const items = document.querySelectorAll('.results-carousel .item');
+            const itemWidth = items[0].clientWidth;
+            const offset = -currentIndex * itemWidth;
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+        function nextSlide() {
+            const items = document.querySelectorAll('.results-carousel .item');
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }
+        function prevSlide() {
+            const items = document.querySelectorAll('.results-carousel .item');
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = items.length - 1;
+            }
+            updateCarousel();
+        }
+    </script>
+
+    <section class="hero teaser is-light">
+        <div class="hero-body">
+            <div class="container">
+                <div class="carousel-wrapper">
+                    <button class="carousel-button prev" onclick="prevSlide()">&#8249;</button>
+                    <div class="results-carousel">
+                        <!-- TODO: Add result videos here -->
+                        <div class="item">
+                            <video autoplay controls muted loop playsinline>
+                                <source src="./static/videos/placeholder_1.mp4" type="video/mp4">
+                            </video>
+                            <p class="has-text-centered">Scene 1 - Novel View Synthesis</p>
+                        </div>
+                        <div class="item">
+                            <video autoplay controls muted loop playsinline>
+                                <source src="./static/videos/placeholder_2.mp4" type="video/mp4">
+                            </video>
+                            <p class="has-text-centered">Scene 2 - Novel View Synthesis</p>
+                        </div>
+                        <div class="item">
+                            <video autoplay controls muted loop playsinline>
+                                <source src="./static/videos/placeholder_3.mp4" type="video/mp4">
+                            </video>
+                            <p class="has-text-centered">Scene 3 - Novel View Synthesis</p>
+                        </div>
+                    </div>
+                    <button class="carousel-button next" onclick="nextSlide()">&#8250;</button>
+                </div>
+            </div>
+            <h2 class="subtitle has-text-centered is-size-6-mobile" style="margin-top: 1rem;">
+                Novel view synthesis results from motion-blurred inputs. Click the arrows to view more results.
+            </h2>
+        </div>
+    </section>
+
+    <!-- ===== Abstract ===== -->
+    <section class="section">
+        <div class="container is-max-desktop is-mobile">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        3D Gaussian Splatting (3DGS) has emerged as a powerful representation for novel view synthesis, yet its reliance on accurate Structure-from-Motion (SfM) initialization makes it vulnerable to severe motion blur. Existing deblurring methods face a fundamental chicken-and-egg dilemma: accurate camera poses are needed to deblur images, but deblurred images are needed to estimate poses. Event cameras, with their microsecond-level temporal resolution, offer blur-free observations that can break this cycle, yet prior event-aided approaches rely on indirect multi-stage initialization and treat camera poses as fixed constants.
+                        We propose <b>EADGS</b>, a unified framework that leverages event-based initialization and learnable pose refinement for motion-deblurred 3D Gaussian Splatting. Our method consists of three stages: (1) event data preprocessing via Contrast Maximization with a novel Event Contrast Normalization to produce Motion-Aligned Event Descriptors; (2) a feed-forward vision transformer that directly predicts camera poses and dense 3D point clouds from event descriptors, completely bypassing blur-corrupted RGB-based SfM; and (3) a deblurring 3DGS training loop with Lie-algebraic pose parameterization and alternating optimization for joint trajectory-geometry refinement.
+                        Extensive experiments on synthetic (DeepVoxels, NeRF Synthetic), real scene (Tanks &amp; Temples), and real-world collected (DAVIS346 on UAV) datasets demonstrate that EADGS achieves state-of-the-art performance in novel view synthesis quality under challenging motion blur conditions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== Method Overview ===== -->
+    <section class="section">
+        <div class="container is-max-desktop is-mobile">
+            <div class="is-centered" style="margin-bottom: 1.5rem;">
+                <h2 class="title is-3">Method Overview</h2>
+            </div>
+            <p>
+                EADGS introduces a three-stage pipeline for event-aided motion deblurring in 3D Gaussian Splatting. First, raw event streams are preprocessed via Contrast Maximization to produce sharp Image of Warped Events (IWE) and dense optical flow, bridged to the RGB domain through Event Contrast Normalization (ECN). Second, a feed-forward vision transformer (VGGT) predicts camera poses and dense 3D point maps directly from these Motion-Aligned Event Descriptors (MAED), entirely bypassing blur-corrupted SfM. Third, a deblurring 3DGS training loop with Lie-algebraic pose parameterization synthesizes blur by averaging subframe renderings along interpolated exposure trajectories, enabling joint optimization of Gaussian geometry and camera poses via alternating optimization.
+            </p>
+            <br>
+            <div class="is-centered">
+                <figure style="text-align: center;">
+                    <!-- TODO: Replace with actual overview figure -->
+                    <img src="static/img/overview.png" alt="EADGS Pipeline Overview" style="display: inline-block; width: 100%;">
+                    <figcaption style="text-align: center; margin-top: 0.5rem; color: #666;">
+                        Figure 1: Overview of the <span class="gradient-text"><strong>EADGS</strong></span> pipeline. Stage 1 preprocesses events into Motion-Aligned Event Descriptors. Stage 2 estimates camera poses and point clouds via a vision transformer. Stage 3 performs deblurring 3DGS training with learnable pose refinement.
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== Training Pipeline ===== -->
+    <section class="section">
+        <div class="container is-max-desktop is-mobile">
+            <div class="is-centered" style="margin-bottom: 1.5rem;">
+                <h2 class="title is-3">Deblurring Training Loop</h2>
+            </div>
+            <p>
+                During training, EADGS maintains a learnable pose state for each frame consisting of a central pose on SE(3) and a screw motion velocity on se(3). Subframe poses are interpolated along the exposure interval, and the rendered subframes are averaged to synthesize the observed blur. Alternating optimization iteratively switches between optimizing Gaussian parameters (with frozen poses) and optimizing pose states (with frozen Gaussians), using Lie-algebraic perturbation with manifold retraction for stable gradient-based pose refinement.
+            </p>
+            <br>
+            <div class="is-centered">
+                <figure style="text-align: center;">
+                    <!-- TODO: Replace with actual training figure -->
+                    <img src="static/img/training.png" alt="EADGS Training Pipeline" style="display: inline-block; width: 100%;">
+                    <figcaption style="text-align: center; margin-top: 0.5rem; color: #666;">
+                        Figure 2: Deblurring 3DGS training loop with alternating optimization of Gaussian parameters and camera poses.
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== Quantitative Results ===== -->
+    <section class="section">
+        <div class="container is-max-desktop is-mobile">
+            <div class="is-centered" style="margin-bottom: 1.5rem;">
+                <h2 class="title is-3">Quantitative Results</h2>
+            </div>
+            <p>
+                Quantitative comparisons of novel view synthesis across synthetic, real scene, and real-world collected datasets. Our method consistently outperforms previous state-of-the-art approaches across PSNR, SSIM, and LPIPS metrics. Best results are in <b>bold</b> and second-best are <u>underlined</u>.
+            </p>
+            <br>
+            <div class="is-centered">
+                <figure style="text-align: center;">
+                    <!-- TODO: Replace with actual results table image -->
+                    <img src="static/img/table.png" alt="Quantitative Results Table" style="display: inline-block; width: 100%;">
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== Qualitative Comparisons (Interactive) ===== -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="container is-max-desktop is-mobile">
+                <h2 class="title is-3">Visual Comparisons</h2>
+            </div>
+            <br>
+            <div class="column">
+                <p>Interactive image comparisons between baseline methods and <strong>EADGS</strong>. Drag the slider to compare.</p>
+            </div>
+
+            <div class="columns is-centered has-text-centered">
+                <!-- Comparison pair 1 -->
+                <div class="column">
+                    <div class="content">
+                        <div class="bal-container-small image-compare">
+                            <div class="bal-after">
+                                <!-- TODO: Replace with actual result image -->
+                                <img src="static/img/example/scene1/ours.png">
+                                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                    EADGS (Ours)
+                                </div>
+                                <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                    -- dB
+                                </div>
+                            </div>
+                            <div class="bal-before" style="width:50%;">
+                                <div class="bal-before-inset" style="width: 539px;">
+                                    <!-- TODO: Replace with baseline result image -->
+                                    <img src="static/img/example/scene1/baseline.png">
+                                    <div class="bal-beforePosition beforeLabel">
+                                        Baseline
+                                    </div>
+                                    <div class="bal-beforePosition beforeSize">
+                                        -- dB
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bal-handle" style="left:50%;">
+                                <span class="handle-left-arrow"></span>
+                                <span class="handle-right-arrow"></span>
+                            </div>
+                        </div>
+
+                        <div class="bal-container-small image-compare">
+                            <div class="bal-after">
+                                <img src="static/img/example/scene2/ours.png">
+                                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                    EADGS (Ours)
+                                </div>
+                                <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                    -- dB
+                                </div>
+                            </div>
+                            <div class="bal-before" style="width:50%;">
+                                <div class="bal-before-inset" style="width: 539px;">
+                                    <img src="static/img/example/scene2/baseline.png">
+                                    <div class="bal-beforePosition beforeLabel">
+                                        Baseline
+                                    </div>
+                                    <div class="bal-beforePosition beforeSize">
+                                        -- dB
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bal-handle" style="left:50%;">
+                                <span class="handle-left-arrow"></span>
+                                <span class="handle-right-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison pair 2 -->
+                <div class="column">
+                    <div class="content">
+                        <div class="bal-container-small image-compare">
+                            <div class="bal-after">
+                                <img src="static/img/example/scene3/ours.png">
+                                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                    EADGS (Ours)
+                                </div>
+                                <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                    -- dB
+                                </div>
+                            </div>
+                            <div class="bal-before" style="width:50%;">
+                                <div class="bal-before-inset" style="width: 539px;">
+                                    <img src="static/img/example/scene3/baseline.png">
+                                    <div class="bal-beforePosition beforeLabel">
+                                        Baseline
+                                    </div>
+                                    <div class="bal-beforePosition beforeSize">
+                                        -- dB
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bal-handle" style="left:50%;">
+                                <span class="handle-left-arrow"></span>
+                                <span class="handle-right-arrow"></span>
+                            </div>
+                        </div>
+
+                        <div class="bal-container-small image-compare">
+                            <div class="bal-after">
+                                <img src="static/img/example/scene4/ours.png">
+                                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                    EADGS (Ours)
+                                </div>
+                                <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                    -- dB
+                                </div>
+                            </div>
+                            <div class="bal-before" style="width:50%;">
+                                <div class="bal-before-inset" style="width: 539px;">
+                                    <img src="static/img/example/scene4/baseline.png">
+                                    <div class="bal-beforePosition beforeLabel">
+                                        Baseline
+                                    </div>
+                                    <div class="bal-beforePosition beforeSize">
+                                        -- dB
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bal-handle" style="left:50%;">
+                                <span class="handle-left-arrow"></span>
+                                <span class="handle-right-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== BibTeX ===== -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@article{eadgs2025,
+  title={Event-Aided Motion Deblurring for 3D Gaussian Splatting via Event-Based Initialization and Learnable Pose Refinement},
+  author={TODO},
+  journal={TODO},
+  year={2025}
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>
+                    This website template is adapted from <a href="https://drexubery.github.io/EvaGaussians/">EvaGaussians</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        for (var elm of document.querySelectorAll(".image-compare")) {
+            new BeforeAfter(elm)
+        }
+        var options = {
+            slidesToScroll: 1,
+            slidesToShow: 3,
+            loop: true,
+            infinite: true,
+            autoplay: false,
+            autoplaySpeed: 3000,
+        }
+        var carousels = bulmaCarousel.attach('.carousel', options);
+        for (var i = 0; i < carousels.length; i++) {
+            carousels[i].on('before:show', () => { });
+        }
+        var element = document.querySelector('#my-element');
+        if (element && element.bulmaCarousel) {
+            element.bulmaCarousel.on('before-show', () => { });
+        }
+    </script>
+</body>
+
+</html>
