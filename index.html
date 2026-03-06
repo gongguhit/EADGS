@@ -39,14 +39,18 @@
 
                         <!-- Authors -->
                         <div class="is-size-5 publication-authors" style="margin-top: 1.5rem;">
-                            <!-- TODO: Replace with actual author names and affiliations -->
-                            <span class="author-block">Author 1<sup>1</sup>,</span>
-                            <span class="author-block">Author 2<sup>1</sup>,</span>
-                            <span class="author-block">Author 3<sup>2</sup></span>
+                            <span class="author-block">Gu Gong<sup>1,2</sup>,</span>
+                            <span class="author-block">Fangyuan Wang<sup>2</sup>,</span>
+                            <span class="author-block">Qiang Wang<sup>1</sup>,</span>
+                            <span class="author-block">Zhen He<sup>1*</sup></span>
+                            <span class="author-block">and David Navarro-Alarcon<sup>2*</sup></span>
                         </div>
                         <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
-                            <span class="author-block"><sup>1</sup>Affiliation 1,</span>
-                            <span class="author-block"><sup>2</sup>Affiliation 2</span>
+                            <span class="author-block"><sup>1</sup>Dept. of Control Science and Engineering, Harbin Institute of Technology, China</span>
+                            <span class="author-block"><sup>2</sup>Dept. of Mechanical Engineering, The Hong Kong Polytechnic University, Hong Kong</span>
+                        </div>
+                        <div class="is-size-6 publication-authors" style="margin-top: 0.3rem;">
+                            <span class="author-block"><sup>*</sup>Corresponding authors</span>
                         </div>
 
                         <!-- Links -->
@@ -119,7 +123,7 @@
                             <video autoplay controls muted loop playsinline>
                                 <source src="./static/videos/placeholder_1.mp4" type="video/mp4">
                             </video>
-                            <p class="has-text-centered">Scene 1 - Novel View Synthesis</p>
+                            <p class="has-text-centered">Results on the synthetic dataset materials, our method shows high deblurring performance</p>
                         </div>
                         <div class="item">
                             <video autoplay controls muted loop playsinline>
@@ -137,9 +141,6 @@
                     <button class="carousel-button next" onclick="nextSlide()">&#8250;</button>
                 </div>
             </div>
-            <h2 class="subtitle has-text-centered is-size-6-mobile" style="margin-top: 1rem;">
-                Novel view synthesis results from motion-blurred inputs. Click the arrows to view more results.
-            </h2>
         </div>
     </section>
 
@@ -150,7 +151,7 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        Coming soon.
+                        3D Gaussian Splatting (3DGS) methods have revolutionized novel view synthesis with the real-time rendering capabilities. However, these methods rely heavily on Structure-from-Motion (SfM) to obtain accurate camera poses, which fails catastrophically when input images suffer from severe motion blur. Existing deblurring 3DGS methods attempt to jointly optimize camera poses and scene geometry but face a ``chicken-and-egg'' dilemma: promising deblurring relies on accurate camera pose while accurate pose depends on clean images. Recent event-aided approaches offer a solution but do not fully exploit the geometric information embedded in event streams, limiting reconstruction quality. In this paper, we propose EADGS, a framework that exploits event-based geometry cues for robust 3DGS reconstruction under severe motion blur. We first extract geometry cues from event streams through a feed-forward vision transformer to directly infer camera poses and point clouds, completely bypassing blur-corrupted RGB-based SfM. Building upon these event-derived geometric priors, we further develop a differentiable trajectory optimization module that jointly refines camera poses with 3D Gaussians in an alternating manner. Extensive experiments on synthetic and real-world datasets demonstrate that EADGS significantly outperforms state-of-the-art methods, achieving superior rendering quality and accurate trajectory estimation even in scenarios with severe blurs.
                     </div>
                 </div>
             </div>
@@ -195,8 +196,7 @@
             <br>
             <div class="is-centered">
                 <figure style="text-align: center;">
-                    <!-- TODO: Replace with actual training figure -->
-                    <img src="static/img/training.png" alt="EADGS Training Pipeline" style="display: inline-block; width: 100%;">
+                    <img src="static/img/traj_optim.png" alt="EADGS Training Pipeline" style="display: inline-block; width: 100%;">
                     <figcaption style="text-align: center; margin-top: 0.5rem; color: #666;">
                         Figure 2: Deblurring 3DGS training loop with alternating optimization of Gaussian parameters and camera poses.
                     </figcaption>
@@ -219,8 +219,7 @@
             <br>
             <div class="is-centered">
                 <figure style="text-align: center;">
-                    <!-- TODO: Replace with actual results table image -->
-                    <img src="static/img/table.png" alt="Quantitative Results Table" style="display: inline-block; width: 100%;">
+                    <img src="static/img/batch_exp.png" alt="Quantitative Results Table" style="display: inline-block; width: 100%;">
                 </figure>
             </div>
         </div>
